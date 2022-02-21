@@ -1,0 +1,91 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Dokumen Approval</title>
+    <link rel="stylesheet" href="{% static 'document approval.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+
+<body>
+
+    <nav>
+        <div class="topnav">
+            <div class="topnav-right">
+                <div class="img-avatar">
+                    <img src="/media/{{ profile.picture }}" style="width:33px;" crossorigin="anonymous">
+                </div><a href="/profile-dospem">{{ profile.username }}</a>
+                <a type="submit" href="/login" class="fas fa-sign-out-alt"></a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar">
+        <header>MANTA</header>
+        <ul>
+            <li><a href="/dashboard-dospem"><i class="fas fa-qrcode"></i>Dashboard</a></li>
+            <li><a href="/pendaftaran-adm-dospem"><i class="fas fa-address-card"></i>Pendaftaran Administratif</a></li>
+            <li><a href="/Scheduling-dosen-pembimbing"><i class="fas fa-calendar-week"></i>Scheduling</a></li>
+            <li><a href="/meeting-management-dospem"><i class="fas fa-sticky-note"></i>Meeting Management</a></li>
+            <li><a href="/document-approval-dosenpembimbing"><i class="fas fa-file"></i>Document Approval</a></li>
+        </ul>
+    </div>
+
+    <div class="Document Approval">
+        <h1>Document Approval</h1>
+    </div>
+
+    <br><br>
+
+    <br><br> {% for message in messages %} {% if message %}
+    <div class="alert alert-success">{{ message }}</div>
+    {% endif %} {% endfor %}
+
+    <div class="col-75">
+        <table class="tabelfile mb-0">
+            <thead>
+                <tr>
+                    <th>Group Number</th>
+                    <th>Group Members</th>
+                    <th>File Name</th>
+                    <th>File Document</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for document in documents %}
+                <tr>
+                    <td>{{ document.group_number}}</td>
+                    <td>{{ document.group_members}}</td>
+                    <td>{{ document.file_name}}</td>
+                    <td>
+                        <a href="/media/{{ document.pdf }}" class="pdf" target="_blank">{{ document.pdf }}</a>
+                    </td>
+                    <td> disetujui
+                        <div class="feed_inputOptions">
+                            <div class="inputoption">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+            <label for="subject">Subject</label>
+        </div>
+    </div>
+
+
+    <section></section>
+
+</body>
+
+</html>

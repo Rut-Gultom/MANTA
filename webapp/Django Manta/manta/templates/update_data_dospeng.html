@@ -1,0 +1,179 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Update Data</title>
+        <link rel="stylesheet" href="{% static 'pendaftaran_administratif.css'%}">
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <style>
+            input{
+                float : right;
+                width: 40%;
+                size: 30%;
+                padding: 1%;
+            }
+            body {
+            font-family: "Lato", sans-serif;
+            }
+
+            /* Fixed sidenav, full height */
+            .sidenav {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: rgb(45, 55, 99);
+            overflow-x: hidden;
+            padding-top: 20px;
+            }
+
+            /* Style the sidenav links and the dropdown button */
+            .sidenav a,
+            .dropdown-btn {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #f8f0f0;
+            display: block;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            outline: none;
+            }
+
+            /* On mouse-over */
+            .sidenav a:hover,
+            .dropdown-btn:hover {
+            color: #f1f1f1;
+            }
+
+            /* Main content */
+            .main {
+            margin-left: 200px;
+            /* Same as the width of the sidenav */
+            font-size: 20px;
+            /* Increased text to enable scrolling */
+            padding: 0px 10px;
+            }
+
+            /* Add an active class to the active dropdown button */
+            .active {
+            background-color: rgb(45, 55, 99);
+            color: white;
+            }
+
+            /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+            .dropdown-container {
+            display: none;
+            background-color: #262626;
+            padding-left: 8px;
+            }
+
+            /* Optional: Style the caret down icon */
+            .fa-caret-down {
+            float: right;
+            padding-right: 8px;
+            }
+
+            /* Some media queries for responsiveness */
+            @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+            .sidenav a {
+                font-size: 18px;
+            }
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav>
+            <div class="topnav">
+                <div class="topnav-right">
+                  <a href="/update-profile-dopem">BAAK</a>
+                  
+                  <a type="submit" href="/logout" class="fas fa-sign-out-alt"></a>
+                </div>
+              </div>
+        </nav>
+            <div class="sidebar">
+              <header>MANTA</header>
+              <ul>
+                <li><a href="/dashboard-baak"><i class="fas fa-address-card"></i>Registrasi</a></li>
+                <button class="dropdown-btn"><i i class="fas fa-edit"></i> Update data
+                    <i class="fa fa-caret-down"></i>
+                  </button>
+                  <div class="dropdown-container">
+                    <a href="/update-data">Update Mahasiswa</a>
+                    <a href="/update-data-dospem">Update Dosen Pembimbing</a>
+                    <a href="/update-data-dospeng">Update Dosen Penguji</a>
+                    <a href="/update-data-koordinator">Update Koordinator TA</a>
+                  </div>
+              </ul>
+            </div>
+        </nav>
+
+ 
+        <div class="row">
+            <div class="col-75">
+                <div class="mt-3 mb-3">
+                    <form action="" method = "post">
+                        {% csrf_token %}
+                        <input type="search" name="search" placeholder="Search by username" class="form-control">
+                    </form>
+                </div>
+                <h1>Data Dosen Penguji</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Username</th>
+                            <th>Password</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for dosen in list_dospeng %}
+                        <tr>
+                            <td>{{dosen.name}}</td>
+                            <td>{{dosen.email}}</td>
+                            <td>{{dosen.username}}</td>
+                            <td>{{dosen.password}}</td>
+                            <td><div class = "icon">
+                                <a href="{% url 'deleteDataDospeng' dosen.pk %}" class="fas fa-trash"></a>
+                                <a href="{% url 'editDataDospeng' dosen.pk %} " class="fas fa-edit"></a> </div></td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script>
+            var dropdown = document.getElementsByClassName("dropdown-btn");
+            var i;
+
+            for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+                } else {
+                dropdownContent.style.display = "block";
+                }
+            });
+            }         
+        </script>
+
+    </body>
+
+</html>

@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'styledashboard.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+
+<body>
+
+    <nav>
+        <div class="topnav">
+            <div class="topnav-right">
+                <div class="img-avatar">
+                    <img src="/media/{{ profile.picture }}" style="width:33px;" crossorigin="anonymous">
+                </div><a href="/profile-dospeng">{{ profile.username }}</a>
+                <a type="submit" href="/login" class="fas fa-sign-out-alt"></a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar">
+        <header>MANTA</header>
+        <ul>
+            <li><a href="/dashboard-dospenguji"><i class="fas fa-qrcode"></i>Dashboard</a></li>
+            <li><a href="/Scheduling-Dosen-Penguji"><i class="fas fa-calendar-week"></i>Scheduling</a></li>
+            <li><a href="/document-approval-dosenpenguji"><i class="fas fa-file"></i>Document Approval</a></li>
+        </ul>
+    </div>
+
+    <div class="dashboard">
+        <form>
+            <h1>Dashboard</h1><br>
+            <h2>Pengumuman!</h2>
+            <p>Selamat datang di Dashboard Manajemen Tugas Akhir</p> <br>
+            <HR> <br> {% for announcement in dospeng_announcement %}
+            <p class="title">{{ announcement.title}}</p>
+            <p class="text">{{ announcement.body}}</p><br>
+            <p class="date">date : {{announcement.post_date}}</p>
+            <HR> <br> {% endfor %}
+    </div>
+
+    <section></section>
+
+</body>
+
+</html>

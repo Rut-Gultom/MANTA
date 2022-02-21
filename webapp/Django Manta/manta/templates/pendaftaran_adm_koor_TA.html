@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Pendaftaran administrasi koordinator TA{% endblock %} </title>
+    <link rel="stylesheet" href="{% static 'pendaftaran_administratif.css'%}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" type="text/css" href="pendaftaran_adm.css">
+</head>
+
+<body>
+
+    <nav>
+        <div class="topnav">
+            <div class="topnav-right">
+                <div class="img-avatar">
+                    <img src="/media/{{ profile.picture }}" style="width:33px;" crossorigin="anonymous">
+                </div><a href="/profile-koordinatorTA">{{ profile.username }}</a>
+                <a type="submit" href="/login" class="fas fa-sign-out-alt"></a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar">
+        {% block sidebar %}
+        <header>MANTA</header>
+        <ul>
+            <li><a href="/dashboard-koordinator-TA"><i class="fas fa-qrcode"></i>Dashboard</a></li>
+            <li><a href="/pendaftaran-adm-koor-TA"><i class="fas fa-address-card"></i>Pendaftaran Administratif</a></li>
+            <li><a href="/Scheduling-Koordinator-TA"><i class="fas fa-calendar-week"></i>Scheduling</a></li>
+            <li><a href="/meeting-management-KTA"><i class="fas fa-sticky-note"></i>Meeting Management</a></li>
+        </ul>
+        {% endblock %}
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-25">
+            </div>
+            <div class="col-75"> <label for="fname"><b>PENDAFTARAN ADMINISTRATIF</b></label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+            </div>
+            <div class="col-75">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nomor Kelompok</th>
+                            <th>Nim Anggota</th>
+                            <th>Program Studi</th>
+                            <th>Dosen Pembimbing</th>
+                            <th>aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if pendaftaran_koorta|length > 0 %} {% for koorta in pendaftaran_koorta %}
+                        <tr>
+                            <td>{{loop.index}}</td>
+                            <td>{{ koorta.group_number}}</td>
+                            <td>{{ koorta.group_members}}</td>
+                            <td>{{ koorta.study_program}}</td>
+                            <td>{{ koorta.supervisor}}</td>
+                            <td>
+                                <a href="{% url 'deletependaftaran' koorta.pk %} " class="fas fa-trash"></a>
+                                <a href="{% url 'editpendaftaran' koorta.pk %} " class="fas fa-edit"></a>
+
+                            </td>
+                        </tr>
+                        {% endfor %} {% endif %}
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="subject">Subject</label>
+            </div>
+        </div>
+
+
+</body>
+
+</html>

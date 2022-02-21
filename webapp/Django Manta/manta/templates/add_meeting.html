@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'pendaftaran_administratif.css'%}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+
+<body>
+
+    <nav>
+        <div class="topnav">
+            <div class="topnav-right">
+                <div class="img-avatar">
+                    <img src="/media/{{ profile.picture }}" style="width:33px;" crossorigin="anonymous">
+                </div><a href="/profile-mahasiswa">{{ profile.username }}</a>
+                <a type="submit" href="/login" class="fas fa-sign-out-alt"></a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar">
+        {% block sidebar %}
+        <header>MANTA</header>
+        <ul>
+            <li><a href="/dashboard-dospem"><i class="fas fa-qrcode"></i>Dashboard</a></li>
+            <li><a href="/pendaftaran-adm-dospem"><i class="fas fa-address-card"></i>Pendaftaran Administratif</a></li>
+            <li><a href="/Scheduling-dosen-pembimbing"><i class="fas fa-calendar-week"></i>Scheduling</a></li>
+            <li><a href="/meeting-management-dospem"><i class="fas fa-sticky-note"></i>Meeting Management</a></li>
+            <li><a href="document-approval-dosenpembimbing"><i class="fas fa-file"></i>Document Approval</a></li>
+        </ul>
+        {% endblock %}
+    </div>
+
+    <form action="{% url 'add_meeting' %}" method="POST">
+        {% csrf_token %}
+        <div class="container">
+            <div class="row">
+                <div class="col-75">
+                </div>
+                <h1>Meeting Management</h1><br>
+                <label for="body">id_meeting</label>
+                <input type="text" id="meeting_id" name="meeting_id">
+                <label for="title">group_number</label>
+                <input type="text" id="group_number" name="group_number">
+                <label for="body">activity</label>
+                <input type="text" id="activity" name="activity">
+                <label for="body">topic</label>
+                <input type="text" id="topic" name="topic">
+                <label for="body">meeting_result</label>
+                <input type="text" id="meeting_result" name="meeting_result">
+                <label for="body">link_media</label>
+                <input type="text" id="link_media" name="link_media">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+            </div>
+            <div class="col">
+            </div>
+        </div>
+        <div class="row">
+        </div>
+        <div class="row">
+            <button type="submit" name="submit">Publish</button> <br>
+        </div>
+    </form>
+    </div>
+</body>
+
+</html>

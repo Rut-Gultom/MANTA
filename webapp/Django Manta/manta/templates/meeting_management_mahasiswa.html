@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Meeting Management Dosen Pembimbing{% endblock %} </title>
+    <link rel="stylesheet" href="{% static 'meeting_management.css'%}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" type="text/css" href="pendaftaran_adm.css">
+  </head>
+  
+  <body>
+    <nav>
+
+      <div class="topnav">
+      <a class="active" href="#">MANTA</a>
+      <div class="topnav-right">
+        <a href="/profile-mahasiswa">{{profile.username}}</a>
+        <a type="submit" href="/login" class="fas fa-sign-out-alt"></a>
+      </div>
+    </div>
+  </nav>  
+    <div class="sidebar">
+      <header>MANTA</header>
+    <ul>
+      <li><a href="/dashboard-mahasiswa"><i class="fas fa-qrcode"></i>Dashboard</a></li>
+      <li><a href="/pendaftaran-adm-mhs"><i class="fas fa-address-card"></i>Pendaftaran Administratif</a></li>
+      <li><a href="/Scheduling-Mahasiswa"><i class="fas fa-calendar-week"></i>Scheduling</a></li>
+      <li><a href="/meeting-management-mahasiswa"><i class="fas fa-sticky-note"></i>Meeting Management</a></li>
+      <li><a href="/document-approval-mahasiswa1"><i class="fas fa-file"></i>Document Approval</a></li>
+  </ul>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-25">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+    </div>
+    <div class="col-75">
+      <h1>Meeting Management</h1>
+  <br>
+      <table>
+        <thead>
+          <tr>
+            <th>No Kelompok</th>
+            <th>Nama Kegiatan</th>
+            <th>Topik</th>
+            <th>Link/Media</th>
+            <th>Hasil Meeting</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for meeting in meetings %}
+          <tr>
+            <td>{{meeting.group_number}}</td>
+            <td>{{meeting.activity}}</td>
+            <td>{{meeting.topic}}</td>
+            <td>{{meeting.meeting_result}}</td>
+            <td>{{meeting.link_media}}</td>
+            <td>
+            </td>
+          </tr>
+          {% endfor %} 
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="subject">Subject</label>
+    </div>
+  </div>
+
+
+</body>
+
+</html>
+
+
+ 
+ 

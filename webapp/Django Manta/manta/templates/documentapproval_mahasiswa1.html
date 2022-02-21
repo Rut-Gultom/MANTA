@@ -1,0 +1,83 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Document Approval</title>
+    <link rel="stylesheet" href="{% static 'document approval.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+
+<body>
+
+    <nav>
+        <div class="topnav">
+            <div class="topnav-right">
+                <div class="img-avatar">
+                    <img src="/media/{{ profile.picture }}" style="width:33px;" crossorigin="anonymous">
+                </div><a href="/profile-mahasiswa">{{ profile.username }}</a>
+                <a type="submit" href="/login" class="fas fa-sign-out-alt"></a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar">
+        <header>MANTA</header>
+        <ul>
+            <li><a href="/dashboard-mahasiswa"><i class="fas fa-qrcode"></i>Dashboard</a></li>
+            <li><a href="/pendaftaran_adm"><i class="fas fa-address-card"></i>Pendaftaran Administratif</a></li>
+            <li><a href="/Scheduling-Mahasiswa"><i class="fas fa-calendar-week"></i>Scheduling</a></li>
+            <li><a href="/meeting-management-mahasiswa"><i class="fas fa-sticky-note"></i>Meeting Management</a></li>
+            <li><a href="/document-approval-mahasiswa1"><i class="fas fa-file"></i>Document Approval</a></li>
+        </ul>
+    </div>
+
+    <div class="Document Approval">
+        <br>
+        <h1> &emsp; Document Approval</h1>
+
+        {% if pesan %}
+        <div class="alert alert-success">{{ pesan }}</div>
+        {% endif %}
+
+        <br />
+        <form action="{%url 'document-approval-mahasiswa1' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="Upload">
+                <h2>Upload</h2>
+                <br />
+                <p>Upload file Anda dengan melengkapi form dibawah ini. </p>
+                <br>
+                <br />
+                <p>
+                    <label>Group Number &emsp; :</label>
+                    <input type="number" name="group_number" placeholder="Group Number..." style="width: 500px; height: 20px;" />
+                    <br><br>
+                    <label>Group Members&emsp;:</label>
+                    <input type="text" name="group_members" placeholder="Group Members..." style="width: 500px; height: 20px;" />
+                    <br><br>
+                    <label>File Name &emsp;&emsp;&emsp;   :</label>
+                    <input type="text" name="file_name" placeholder="File Name..." style="width: 500px; height: 20px;" />
+                </p>
+                <br />
+                <p>
+                    <p>Pilih File &emsp;&emsp;&emsp;&emsp;: <input type='file' name='pdf' accept='File/*' /></p>
+                    <br />
+                    <br>
+                    <button type="submit" value="Upload file"> Upload </button></a>
+                    <br>
+                    <br>
+                    <a href="/document-approval-mahasiswa2" class="btn-esc" style="color: rgb(6, 9, 14);">
+          SKIP >></a>
+
+        </form>
+
+        </div>
+
+
+</body>
+
+</html>

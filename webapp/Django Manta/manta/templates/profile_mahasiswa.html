@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Profile Mahasiswa</title>
+    <link rel="stylesheet" href="{% static 'style_profile.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+
+<body>
+
+
+    <nav>
+
+        <div class="topnav">
+            <div class="topnav-right">
+                <div class="img-avatar">
+                    <img src="/media/{{ profile.picture }}" style="width:33px;" crossorigin="anonymous">
+                </div><a href="/profile-mahasiswa">{{ profile.username }}</a>
+                <a type="submit" href="/login" class="fas fa-sign-out-alt"></a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar">
+        <header>MANTA</header>
+        <ul>
+            <li><a href="/dashboard-mahasiswa"><i class="fas fa-qrcode"></i>Dashboard</a></li>
+            <li><a href="/pendaftaran_adm"><i class="fas fa-address-card"></i>Pendaftaran Administratif</a></li>
+            <li><a href="/Scheduling-Mahasiswa"><i class="fas fa-calendar-week"></i>Scheduling</a></li>
+            <li><a href="/meeting-management-mahasiswa"><i class="fas fa-sticky-note"></i>Meeting Management</a></li>
+            <li><a href="/document-approval-mahasiswa1"><i class="fas fa-file"></i>Document Approval</a></li>
+        </ul>
+    </div>
+    <br>
+    <div class="Profile">
+        <h1 style="color: #0e5e83; margin-left: 400px; font-size:x-large">Profile Pengguna</h1>
+    </div>
+
+    <div id="grid-system2" class="col-sm-3">
+        <div class="box box-solid ">
+            <div id="grid-system2-body" class="box-body">
+
+                <section id="box-profile">
+                    <div class="img-profile">
+                        <div class="form-img text-center mgbt-xs-15" style="margin-left: 70px; cursor: zoom-in;">
+                            <img alt="example image" src="{% static profile.picture %}" style="margin-top: 27px ;width: 180px; height: 180px;"> </div>
+                    </div>
+
+                    <div class="table-profile" style="padding: 40px 50px 50px 400px; width: 60%;">
+
+                        <table id="w0" class="table table-condensed detail-view" style=" background-color: white; border-color: white ;">
+
+
+                            <div class="edit" style="float: right; font-size: larger; color: rgb(47, 78, 78);">
+                                <a type="submit" href="/edit-profile" class="fas fa-edit"></a>
+                            </div>
+                            <div class="table-profile" style="padding: 0px 30px 20px 50px ;">
+                                <tr>
+                                    <th style="border: 1px solid rgb(255, 255, 255); background-color:rgb(253, 253, 253);">
+                                        NIM</th>
+                                    <td style="border: 1px solid rgb(255, 255, 255); background-color:rgb(253, 253, 253);">
+                                        {{ profile.nim }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="border: 1px solid rgb(255, 255, 255); background-color:rgb(253, 253, 253);">
+                                        Nama</th>
+                                    <td style="border: 1px solid rgb(255, 255, 255); background-color:rgb(253, 253, 253);">
+                                        {{ profile.name }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="border: 1px solid rgb(255, 255, 255); background-color:rgb(253, 253, 253);">
+                                        Address</th>
+                                    <td style="border: 1px solid rgb(255, 255, 255); background-color:rgb(253, 253, 253);">
+                                        {{ profile.address }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="border: 1px solid rgb(255, 255, 255); background-color:rgb(253, 253, 253);">
+                                        Mobile</th>
+                                    <td style="border: 1px solid rgb(255, 255, 255); background-color:rgb(253, 253, 253);">
+                                        {{ profile.mobile }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="border: 1px solid rgb(255, 255, 255);background-color:rgb(253, 253, 253);">
+                                        Email</th>
+                                    <td style="border: 1px solid rgb(255, 255, 255);background-color:rgb(253, 253, 253);">
+                                        {{ profile.email }}</td>
+                                </tr>
+
+                            </div>
+
+                        </table>
+
+                </section>
+                </div>
+            </div>
+
+
+</body>
+
+</html>

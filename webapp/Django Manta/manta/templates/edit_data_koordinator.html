@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="{% static 'pendaftaran_administratif.css'%}">
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body {
+      font-family: "Lato", sans-serif;
+    }
+
+    /* Fixed sidenav, full height */
+    .sidenav {
+      height: 100%;
+      width: 200px;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: rgb(45, 55, 99);
+      overflow-x: hidden;
+      padding-top: 20px;
+    }
+
+    /* Style the sidenav links and the dropdown button */
+    .sidenav a,
+    .dropdown-btn {
+      padding: 6px 8px 6px 16px;
+      text-decoration: none;
+      font-size: 20px;
+      color: #f8f0f0;
+      display: block;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      outline: none;
+    }
+
+    /* On mouse-over */
+    .sidenav a:hover,
+    .dropdown-btn:hover {
+      color: #f1f1f1;
+    }
+
+    /* Main content */
+    .main {
+      margin-left: 200px;
+      /* Same as the width of the sidenav */
+      font-size: 20px;
+      /* Increased text to enable scrolling */
+      padding: 0px 10px;
+    }
+
+    /* Add an active class to the active dropdown button */
+    .active {
+      background-color: rgb(45, 55, 99);
+      color: white;
+    }
+
+    /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+    .dropdown-container {
+      display: none;
+      background-color: #262626;
+      padding-left: 8px;
+    }
+
+    /* Optional: Style the caret down icon */
+    .fa-caret-down {
+      float: right;
+      padding-right: 8px;
+    }
+
+    /* Some media queries for responsiveness */
+    @media screen and (max-height: 450px) {
+      .sidenav {
+        padding-top: 15px;
+      }
+
+      .sidenav a {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+
+    <div class="topnav">
+      <div class="topnav-right">
+        <a href="/update-profile-dopem">BAAK</a>
+        <a type="submit" href="/logout" class="fas fa-sign-out-alt"></a>
+      </div>
+    </div>
+  </nav>
+  <div class="sidebar">
+    <header>MANTA</header>
+    <ul>
+      <li><a href="/dashboard-baak"><i class="fas fa-address-card"></i>Registrasi</a></li>
+      <!-- <li><a href="#"><i class="fas fa-edit"></i>Update data</a></li> -->
+      <button class="dropdown-btn"><i i class="fas fa-edit"></i> Update data
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-container">
+        <a href="/update-data">Update Mahasiswa</a>
+        <a href="/update-data-dospem">Update Dosen Pembimbing</a>
+        <a href="/update-data-dospeng">Update Dosen Penguji</a>
+        <a href="/update-data-koordinator">Update Koordinator TA</a>
+      </div>
+
+
+    </ul>
+  </div>
+
+  <div class="dashboard">
+    {% for dosen in list_koordinator %}
+    <form action="/update-koordinator/{{dosen.nidn_koordinator}}" method="POST">
+      {% csrf_token %}
+      <h1>Edit Data</h1><br>
+      <label for="name">Nama</label>
+      <input type="text" id="name" name="name" value="{{dosen.name}}">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" value="{{dosen.username}}">
+      <label for="password">Password</label>
+      <input type="text" id="password" name="password" value="{{dosen.password}}">
+      <button type="submit" name="submit">Save Change</button>
+  </div>
+    </form>
+    {% endfor %}
+
+  <script>
+    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+
+    for (i = 0; i < dropdown.length; i++) {
+      dropdown[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var dropdownContent = this.nextElementSibling;
+        if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+        } else {
+          dropdownContent.style.display = "block";
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>

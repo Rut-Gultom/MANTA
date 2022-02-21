@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Dashboard{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styledashboard.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="topnav">
+            <div class="topnav-right">
+                <div class="img-avatar">
+                    <img src="/media/{{ profile.picture }}" style="width:33px;" crossorigin="anonymous">
+                </div><a href="/profile-mahasiswa">{{ profile.username }}</a>
+                <a type="submit" href="/login" class="fas fa-sign-out-alt"></a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar">
+        {% block sidebar %}
+        <header>MANTA</header>
+        <ul>
+            <li><a href="/dashboard-mahasiswa"><i class="fas fa-qrcode"></i>Dashboard</a></li>
+            <li><a href="/pendaftaran_adm"><i class="fas fa-address-card"></i>Pendaftaran Administratif</a></li>
+            <li><a href="/Scheduling-Mahasiswa"><i class="fas fa-calendar-week"></i>Scheduling</a></li>
+            <li><a href="/meeting-management-mahasiswa"><i class="fas fa-sticky-note"></i>Meeting Management</a></li>
+            <li><a href="/document-approval-mahasiswa1"><i class="fas fa-file"></i>Document Approval</a></li>
+        </ul>
+        {% endblock %}
+    </div>
+
+    <div class="dashboard">
+        <form>
+            <h1>Dashboard</h1><br>
+            <h2>Pengumuman!</h2>
+
+
+            <p>Selamat datang di Dashboard Manajemen Tugas Akhir</p> <br>
+            <HR> <br> {% for announcement in mahasiswa_announcement %}
+            <p class="title">{{ announcement.title}}</p>
+            <p class="body">{{ announcement.body}}</p><br>
+            <p class="date">date : {{announcement.post_date}}</p>
+            <HR> <br> {% endfor %}
+        </form>
+    </div>
+
+    <section></section>
+
+</body>
+
+</html>

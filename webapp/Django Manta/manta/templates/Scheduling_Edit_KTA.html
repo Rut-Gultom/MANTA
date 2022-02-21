@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Scheduling{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'scheduling.css'%}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="topnav">
+            <div class="topnav-right">
+                <div class="img-avatar">
+                    <img src="/media/{{ profile.picture }}" style="width:33px;" crossorigin="anonymous">
+                </div><a href="/profile-koordinatorTA">{{ profile.username }}</a>
+                <a type="submit" href="/login" class="fas fa-sign-out-alt"></a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar">
+        {% block sidebar %}
+        <header>MANTA</header>
+        <ul>
+            <li><a href="/dashboard-koordinator-TA"><i class="fas fa-qrcode"></i>Dashboard</a></li>
+            <li><a href="/pendaftaran-adm-koor-TA"><i class="fas fa-address-card"></i>Pendaftaran Administratif</a></li>
+            <li><a href="/Scheduling-Koordinator-TA"><i class="fas fa-calendar-week"></i>Scheduling</a></li>
+            <li><a href="/meeting-management-KTA"><i class="fas fa-sticky-note"></i>Meeting Management</a></li>
+        </ul>
+        {% endblock %}
+    </div>
+    {% if scheduling_koorta != NULL %} {% for editscheduling in scheduling_koorta %}
+
+    <form action="/update-sche/{{editscheduling.id_scheduling}}" method="POST">
+        {% csrf_token %}
+        <div class="container">
+            <div class="row">
+                <div class="col-75">
+                </div>
+                <h1>Scheduling</h1><br>
+                <label for="body">ID Scheduling</label>
+                <input type="text" id="id_scheduling" name="id_scheduling">
+                <label for="body">Group Number</label>
+                <input type="text" id="group_number" name="group_number">
+                <label for="title">Group Member</label>
+                <input type="text" id="group_member" name="group_member">
+                <label for="body">Activity Name</label>
+                <input type="text" id="activity_name" name="activity_name">
+                <label for="body">Date</label>
+                <input type="text" id="date" name="date">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+            </div>
+            <div class="col">
+            </div>
+        </div>
+        <div class="row">
+        </div>
+        <div class="row">
+            <button type="submit" name="submit">Submit</button>
+        </div>
+    </form>
+    {% endfor %} {% endif %}
+    </div>
+
+
+</body>
+
+</html>

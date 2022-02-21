@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="{% static 'style_profile.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+
+<body>
+
+
+    <nav>
+
+        <div class="topnav">
+            <div class="topnav-right">
+                <div class="img-avatar">
+                    <img src="/media/{{ profile.picture }}" style="width:33px;" crossorigin="anonymous">
+                </div><a href="/profile-koordinatorTA">{{ profile.username }}</a>
+                <a type="submit" href="/login" class="fas fa-sign-out-alt"></a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar">
+        <header>MANTA</header>
+        <ul>
+            <li><a href="/dashboard-koordinator-TA"><i class="fas fa-qrcode"></i>Dashboard</a></li>
+            <li><a href="/pendaftaran-adm-koor-TA"><i class="fas fa-address-card"></i>Pendaftaran Administratif</a></li>
+            <li><a href="/Scheduling-Koordinator-TA"><i class="fas fa-calendar-week"></i>Scheduling</a></li>
+            <li><a href="/meeting-management-KTA"><i class="fas fa-sticky-note"></i>Meeting Management</a></li>
+        </ul>
+    </div>
+
+    <section id="input-form" style="margin-right: 4%;">
+
+        <form method="POST" action="#" enctype="multipart/form-data">
+
+            <div class="form" style="color: #0e5e83; font-size:x-large"> UPDATE PROFILE
+                <br><br><br>
+                <div class="img-profile">
+                    <div class="form-img text-center mgbt-xs-15">
+                        <img alt="example image" src="/media/{{ profile.picture }}" class="avatar img-circle img-thumbnail" alt="avatar" crossorigin="anonymous" style="width: 160px; height: 160px;"> </div>
+                    <input id="image" style="padding: 1px; border: 5px; font-size: small;" type="file" name="profile_photo" id="profile" class="text-center center-block file-upload" placeholder="Photo" required="" capture>
+                </div>
+                <br> {% csrf_token %}
+                <div class="form">
+                    <label>Name</label>
+                    <input type="text" name="name" id="name" placeholder="Enter your name" value="{{ profile.name }}">
+                </div>
+
+                <div class="form">
+                    <label>Address</label>
+                    <input type="text" name="address" id="address" placeholder="Enter your address" value="{{ profile.address }}">
+                </div>
+
+                <div class="form">
+                    <label>Mobile</label>
+                    <input type="number" name="mobile" id="mobile" placeholder="Enter your contact number" value="{{ profile.mobile }}">
+                </div>
+
+                <div class="form">
+                    <label>Email</label>
+                    <input type="email" name="email" id="email" placeholder="Enter your email" value="{{ profile.email }}">
+                </div>
+
+                <br>
+                <div class="button-save">
+                    <a href="/profile-koordinatorTA"><button type="submit" name="SAVE CHANGE" value="SAVE CHANGE" class="bg-blue"> SAVE CHANGE </button>
+      </div>
+
+  </form>
+  
+</section>
+      </div>
+    </div>
+</div>
+
+</body>
+
+</html>
